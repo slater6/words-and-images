@@ -1,22 +1,24 @@
-import {LETTER_CHECK, WORD_CHECK_COMPLETED} from '../actions'
+import {NEW_WORD,LETTER_CHECK, WORD_CHECK_COMPLETED,FETCH_WORDS} from '../actions'
 
 const wordState = {
-    selected:['a','p','p','l','e'],
-    reduced:['a','p','p','l','e'],
+    words:[],
+    wordCount:0,
+    selected:[],
+    reduced:[],
     progress:[],
     completed:false
 }
 
 export default (state = wordState,action) => {
     
-    let reduceWord = state.reduced;
-    let progressWord = state.progress;
-    let selectedWord = state.selected.toString().toUpperCase();
+    let reduceWord = state.reduced
+    let progressWord = state.progress
+    let selectedWord = state.selected
 
     switch(action.type){
         case LETTER_CHECK:
-            
-            if(reduceWord[0].toUpperCase() === action.payload){
+           
+            if(reduceWord[0] === action.payload){
                 reduceWord.shift()
                 progressWord.push(action.payload)
             }
@@ -29,9 +31,7 @@ export default (state = wordState,action) => {
         
         case WORD_CHECK_COMPLETED:
            
-            progressWord = state.progress.toString().toUpperCase();
-
-            if(selectedWord === progressWord){
+            if(selectedWord.toString() === progressWord.toString()){
                 return {
                     ...state,
                     completed : true
@@ -39,7 +39,27 @@ export default (state = wordState,action) => {
             }
 
             return state
-            
+           
+        
+        case NEW_WORD:
+            let randomWord = state.words[Math.floor(Math.random() * state.wordCount)]['word'].toUpperCase()
+        
+            return {
+                ...state,
+                selected : [...randomWord],
+                reduced:[...randomWord],
+                progress:[],
+                completed:false
+            }
+
+        case FETCH_WORDS:
+            return {
+                ...state,
+                words : action.payload,
+                wordCount: action.payload.length
+            }
+          
+
         default:
                 return state;
     }

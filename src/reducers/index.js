@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux'
 import word from './word'
-//import image from './image'
+import image from './image'
 
 const reducer = combineReducers({
-    word
-    //image
+    word,
+    image
 })
 
 export default reducer;
