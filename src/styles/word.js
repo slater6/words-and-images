@@ -13,7 +13,6 @@ export const Highlighter = styled.span`
     font-size: 6em;
 
     ${props => props.highlight && css`
-        background: white;
         color:red;
     `}
 `

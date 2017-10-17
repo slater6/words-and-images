@@ -1,7 +1,8 @@
-import {NEW_WORD,WORD_COMPLETED} from '../actions'
+import {NEW_WORD,WORD_COMPLETED,LOAD_RANDOM_IMAGE} from '../actions'
 
 const imageState = {
-    src:null
+    images: [],
+    image:[]
 }
 
 export default (state = imageState,action) => {
@@ -9,18 +10,17 @@ export default (state = imageState,action) => {
     switch(action.type){
         
         case WORD_COMPLETED:
-            console.log(action.payload);
-            let randomImageSrc = action.payload[Math.floor(Math.random() * 20)]['webformatURL']
+            return {...state,images:action.payload}
+
+        case LOAD_RANDOM_IMAGE:
+            return {...state,image: state.images[Math.floor(Math.random() * 99)]}
            
-            return {...state,src:randomImageSrc}
-           
-        
         case NEW_WORD:
             
-
             return {
                 ...state,
-                src : null
+                images : [],
+                image : []
             }
 
 

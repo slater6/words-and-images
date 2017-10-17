@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
         <Word></Word>
-        <Image src={this.props.image.src}></Image>
+        <Image src={this.props.image.image.webformatURL}></Image>
       </div>
      
     )

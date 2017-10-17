@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {getNewWord,loadWords,checkLetter,checkWordCompleted,wordCompleted} from '../actions'
+import {getNewWord,loadWords,checkLetter,checkWordCompleted,wordCompleted,loadRandomImage} from '../actions'
 import {Header,WordDisplayer,Highlighter} from '../styles/word'
 
 
@@ -12,17 +12,32 @@ class Word extends Component{
     }
     
     handleKeyPress = (event) => {
+        
+        switch(event.keyCode){
+            case 13:
+                this.props.getNewWord() 
+                break;
 
-        let pressedKey = event.key.toUpperCase()
+            case 32:
+                if(this.props.word.completed){
+                    this.props.loadRandomImage()
+                }
+                break;
+            
+            default:
+                
+                this.props.checkLetter(event.key.toUpperCase())
+                this.props.checkWordCompleted()
 
-        if(this.props.word.completed){
-            this.props.wordCompleted(this.props.word.selected);
-            return
+                if(this.props.word.completed){
+                    this.props.wordCompleted(this.props.word.selected);
+                    return;
+                }
+                break;
         }
-
-        this.props.checkLetter(pressedKey)
-
-        this.props.checkWordCompleted()
+       
+        
+      
     }
     
     handleLabel = () => {
@@ -52,5 +67,5 @@ export default connect(
     (state) => ({
       word:state.word
     }),
-    {getNewWord,loadWords,checkLetter,checkWordCompleted,wordCompleted}
+    {getNewWord,loadWords,checkLetter,checkWordCompleted,wordCompleted,loadRandomImage}
   )(Word)
