@@ -6,7 +6,6 @@ export const WORD_CHECK_COMPLETED = 'WORD_CHECK_COMPLETED'
 export const NEW_WORD = 'NEW_WORD'
 export const FETCH_WORDS = 'FETCH_WORDS'
 
-
 export const loadWords = () => {
     return (dispatch) => {
         firebase
@@ -46,4 +45,20 @@ export const getNewWord = () => {
             type:NEW_WORD
         })
     } 
+}
+
+export const deleteWord = (id) =>{
+    return (dispatch) => {
+        firebase
+        .database()
+        .ref('words/' + id)
+        .remove((error) => {
+            if(error){
+                console.log('Error Deleting word')
+                return
+            }
+
+            dispatch(loadWords())
+        })
+    }
 }

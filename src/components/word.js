@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {getNewWord,loadWords,checkLetter,checkWordCompleted,wordCompleted,loadRandomImage} from '../actions'
-import {Header,WordDisplayer,Highlighter} from '../styles/word'
+import {getNewWord,loadWords,checkLetter,checkWordCompleted,deleteWord,wordCompleted,loadRandomImage} from '../actions'
+import {Header,WordDisplayer,Highlighter,Button} from '../styles/word'
 
 
 class Word extends Component{
@@ -51,6 +51,10 @@ class Word extends Component{
         })
 
     }
+
+    handleDelete = () => {
+        this.props.deleteWord(this.props.word.id)
+    }
     
     render() {
         return (
@@ -58,6 +62,7 @@ class Word extends Component{
                 <WordDisplayer>
                     {this.handleLabel()}
                 </WordDisplayer>
+                <Button onClick={this.handleDelete}>x</Button>
             </Header>
         )
     }
@@ -67,5 +72,5 @@ export default connect(
     (state) => ({
       word:state.word
     }),
-    {getNewWord,loadWords,checkLetter,checkWordCompleted,wordCompleted,loadRandomImage}
+    {getNewWord,loadWords,checkLetter,checkWordCompleted,wordCompleted,deleteWord,loadRandomImage}
   )(Word)

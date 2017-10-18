@@ -1,12 +1,29 @@
 import {NEW_WORD,LETTER_CHECK, WORD_CHECK_COMPLETED,FETCH_WORDS} from '../actions'
 
 const wordState = {
+    id:[],
     words:[],
     wordCount:0,
     selected:[],
     reduced:[],
     progress:[],
     completed:false
+}
+
+const checkRandomIdValidity = (arr,length) => {
+  let randomNumber = Math.floor(Math.random() * length);
+
+  let keys = [...arr.keys()];
+
+  if(keys.find((item) => item === randomNumber)){
+    //return checkRandomIdValidity(arr,length);
+    console.log('Key Found')
+    return randomNumber;
+  }
+
+  console.log('Key Not Found')
+  checkRandomIdValidity(arr,length)
+
 }
 
 export default (state = wordState,action) => {
@@ -42,10 +59,12 @@ export default (state = wordState,action) => {
            
         
         case NEW_WORD:
-            let randomWord = state.words[Math.floor(Math.random() * state.wordCount)]['word'].toUpperCase()
+            let randomWordId = checkRandomIdValidity(state.words,state.wordCount);
+            let randomWord = state.words[randomWordId]['word'].toUpperCase()
         
             return {
                 ...state,
+                id: randomWordId,
                 selected : [...randomWord],
                 reduced:[...randomWord],
                 progress:[],
@@ -58,8 +77,7 @@ export default (state = wordState,action) => {
                 words : action.payload,
                 wordCount: action.payload.length
             }
-          
-
+        
         default:
                 return state;
     }

@@ -16,3 +16,7 @@ export const Highlighter = styled.span`
         color:red;
     `}
 `
+
+export const Button = styled.button`
+    color:red
+`
