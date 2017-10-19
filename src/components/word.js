@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {getNewWord,loadWords,checkLetter,checkWordCompleted,deleteWord,wordCompleted,loadRandomImage} from '../actions'
-import {Header,WordDisplayer,Highlighter,Button} from '../styles/word'
+import {
+    getNewWord,
+    loadWords,
+    checkLetter,
+    checkWordCompleted,
+    deleteWord,
+    getRemoteImage,
+    loadRandomImage,
+    getLocalImage
+} from '../actions'
+import {
+    Header,
+    WordDisplayer,
+    Highlighter,
+    Button
+} from '../styles/word'
 
 
 class Word extends Component{
@@ -29,10 +43,19 @@ class Word extends Component{
                 this.props.checkLetter(event.key.toUpperCase())
                 this.props.checkWordCompleted()
 
-                if(this.props.word.completed){
-                    this.props.wordCompleted(this.props.word.selected);
+                if(!this.props.word.completed){
                     return;
                 }
+                
+
+                if(!this.props.word.imgSrc){
+                    this.props.getRemoteImage(this.props.word.selected);  
+                    return;
+                }
+
+                this.props.getLocalImage(this.props.word.imgSrc);  
+                    
+                
                 break;
         }
        
@@ -72,5 +95,14 @@ export default connect(
     (state) => ({
       word:state.word
     }),
-    {getNewWord,loadWords,checkLetter,checkWordCompleted,wordCompleted,deleteWord,loadRandomImage}
+    {
+        getNewWord,
+        loadWords,
+        checkLetter,
+        checkWordCompleted,
+        getRemoteImage,
+        getLocalImage,
+        deleteWord,
+        loadRandomImage
+    }
   )(Word)

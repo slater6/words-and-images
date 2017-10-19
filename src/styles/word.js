@@ -18,5 +18,12 @@ export const Highlighter = styled.span`
 `
 
 export const Button = styled.button`
-    color:red
+    width:50px;
+    height: 30px;
+    background-color:red;
+    color:white;
+    border:none;
+    border-radius: 5px;
+    font-size: 1.rem;
+    
 `

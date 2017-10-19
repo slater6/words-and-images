@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Word from './components/word'
-import {Image} from './components/image'
-import {connect} from 'react-redux'
+import Image from './components/image'
 
 class App extends Component {
 
@@ -9,16 +8,11 @@ class App extends Component {
     return (
       <div>
         <Word></Word>
-        <Image src={this.props.image.image.webformatURL}></Image>
+        <Image></Image>
       </div>
      
     )
   }
 }
 
-export default connect(
-  (state) => ({
-    word:state.word,
-    image:state.image
-  })
-)(App)
+export default App;
