@@ -6,6 +6,8 @@ export const Header = styled.header`
 `
 
 export const WordDisplayer = styled.h1`
+    flex:2 1 80%;
+    text-align:center;
 `
 
 export const Highlighter = styled.span`
@@ -17,13 +19,33 @@ export const Highlighter = styled.span`
     `}
 `
 
+export const ImageIndicator = styled.img.attrs({
+    display: props => (!props.isVisible) ? 'none' : 'inline'
+})`
+    display: ${props => props.display};
+    margin:0 auto;
+    width: 5%;
+    height:auto;
+`
+
 export const Button = styled.button`
-    width:50px;
-    height: 30px;
-    background-color:red;
+    flex:1;
+    height:50px;
     color:white;
     border:none;
     border-radius: 5px;
-    font-size: 1.rem;
-    
+    font-size: 1.2rem; 
+    color: white;
+    width:100%;
+    padding: 10px;
+    font-weight:bold;
+
+    ${props => props.primary && css`
+        background: green;
+    `}
+
+    ${props => props.danger && css`
+        background: red;
+        
+    `}
 `

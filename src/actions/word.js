@@ -11,7 +11,7 @@ export const loadWords = () => {
         firebase
         .database()
         .ref('words')
-        .on('value', snapshot => {
+        .once('value', snapshot => {
             dispatch({
                 type:FETCH_WORDS,
                 payload:snapshot.val()
@@ -57,7 +57,8 @@ export const deleteWord = (id) =>{
                 console.log('Error Deleting word')
                 return
             }
-
+           
+        }).then((res) => {
             dispatch(loadWords())
         })
     }

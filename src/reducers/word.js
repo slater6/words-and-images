@@ -16,11 +16,13 @@ const checkRandomIdValidity = (arr,length) => {
 
   let keys = [...arr.keys()];
 
-  if(keys.find((item) => item === randomNumber)){
+  let isValidId = (keys.find((item) => item === randomNumber))
+
+  if(isValidId >= 0 && arr[randomNumber]){
     return randomNumber;
   }
 
-  checkRandomIdValidity(arr,length)
+   return checkRandomIdValidity(arr,length)
 
 }
 
@@ -58,6 +60,7 @@ export default (state = wordState,action) => {
         
         case NEW_WORD:
             let randomWordId = checkRandomIdValidity(state.words,state.wordCount);
+            console.log( randomWordId)
             let randomWord = state.words[randomWordId]['word'].toUpperCase()
             let randomImage = state.words[randomWordId]['imgSrc'] !== undefined ? state.words[randomWordId]['imgSrc'] : null;
         

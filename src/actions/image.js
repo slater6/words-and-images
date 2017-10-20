@@ -1,5 +1,6 @@
 import axios from 'axios'
 import firebase from '../services/firebase'
+import {getNewWord} from './word'
 
 export const LOAD_RANDOM_IMAGE = 'LOAD_RANDOM_IMAGE'
 export const LOAD_LOCAL_IMAGE = 'LOAD_LOCAL_IMAGE'
@@ -20,6 +21,8 @@ export const getRemoteImage = (word) => {
 
     return (dispatch) => {
         axios.get(url,params).then((response)=> {
+            console.log(response);
+            
             dispatch({
                 type:LOAD_REMOTE_IMAGE,
                 payload:response['data']['hits']
@@ -49,6 +52,14 @@ export const getLocalImage = (imgUrl) => {
 
 export const saveImage = (wordId,imageSrc) => {
     return (dispatch) => {
-        firebase.database().ref().child('words/' + wordId).update({imgSrc:imageSrc});
+        firebase
+        .database()
+        .ref()
+        .child('words/' + wordId)
+        .update({imgSrc:imageSrc})
+        .then(() => {
+            dispatch(getNewWord())
+        });
+        
     }
 }

@@ -14,7 +14,8 @@ import {
     Header,
     WordDisplayer,
     Highlighter,
-    Button
+    Button,
+    ImageIndicator
 } from '../styles/word'
 
 
@@ -84,8 +85,9 @@ class Word extends Component{
             <Header>
                 <WordDisplayer>
                     {this.handleLabel()}
+                    <ImageIndicator isVisible={this.props.word.imgSrc} src="/img/icon-image.png"></ImageIndicator>
                 </WordDisplayer>
-                <Button onClick={this.handleDelete}>x</Button>
+                <Button danger onClick={this.handleDelete}>x</Button>
             </Header>
         )
     }

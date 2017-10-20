@@ -21,7 +21,9 @@ export default (state = imageState,action) => {
             }
 
         case LOAD_RANDOM_IMAGE:
-            return {...state,image: state.images[Math.floor(Math.random() * 99)]}
+            const imageCount = state.images.length
+            
+            return {...state,image: state.images[Math.floor(Math.random() * imageCount)]}
            
         case NEW_WORD:
             
