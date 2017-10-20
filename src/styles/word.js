@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled, {css,keyframes} from 'styled-components'
 
 export const Header = styled.header`
     display: flex;
@@ -10,12 +10,35 @@ export const WordDisplayer = styled.h1`
     text-align:center;
 `
 
+const activeLetter = keyframes`
+    0% {
+        font-size:6em;
+        transform:rotate(-10deg);
+        color:blue;
+    }
+
+    50% {
+        font-size:6.7em;
+    }
+
+    100% {
+        font-size:6em;
+        transform:rotate(10deg);
+    }
+`;
+
 export const Highlighter = styled.span`
     color:rgb(143, 138, 138);
     font-size: 6em;
+    display:inline-block;
 
     ${props => props.highlight && css`
         color:red;
+    `}
+
+    ${props => props.active && css`
+        color:red;
+        animation: ${activeLetter} 200ms ease;
     `}
 `
 

@@ -65,9 +65,15 @@ class Word extends Component{
     }
     
     handleLabel = () => {
-        return this.props.word.selected.map( (letter, i) => {
+        return this.props.word.selected.map((letter, i) => {
+
+            let lastIndex = this.props.word.progress.length - 1;
+            
+            if(i === lastIndex){
+                return <Highlighter active key={i}>{letter}</Highlighter>
+            }
         
-            if(letter.toUpperCase() === this.props.word.progress[i]){
+            if(letter === this.props.word.progress[i]){
                 return <Highlighter highlight key={i}>{letter}</Highlighter>
             }
 
