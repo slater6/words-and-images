@@ -11,7 +11,7 @@ import {
     getLocalImage
 } from '../actions'
 import {
-    Header,
+    WordHeader,
     WordDisplayer,
     Highlighter,
     Button,
@@ -87,21 +87,27 @@ class Word extends Component{
     }
     
     render() {
+        let btnDelete = ''
+
+        if(this.props.auth.isAuth){
+            btnDelete =  <Button danger onClick={this.handleDelete}>x</Button>
+        }
         return (
-            <Header>
+            <WordHeader>
                 <WordDisplayer>
                     {this.handleLabel()}
                     <ImageIndicator isVisible={this.props.word.imgSrc} src="/img/icon-image.png"></ImageIndicator>
                 </WordDisplayer>
-                <Button danger onClick={this.handleDelete}>x</Button>
-            </Header>
+               {btnDelete}
+            </WordHeader>
         )
     }
 }
 
 export default connect(
     (state) => ({
-      word:state.word
+      word:state.word,
+      auth:state.auth
     }),
     {
         getNewWord,

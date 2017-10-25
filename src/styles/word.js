@@ -1,6 +1,6 @@
 import styled, {css,keyframes} from 'styled-components'
 
-export const Header = styled.header`
+export const WordHeader = styled.header`
     display: flex;
     justify-content: center;
 `
