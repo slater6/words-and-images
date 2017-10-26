@@ -38,7 +38,7 @@ export const getLocalImage = (imgId) => {
         .then((response) => {
             dispatch({
                 type:LOAD_LOCAL_IMAGE,
-                payload : response['data']['hits']['webformatURL']
+                payload : response['data']['hits'][0]['webformatURL']
             })
         })
         .catch()

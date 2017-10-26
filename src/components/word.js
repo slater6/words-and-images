@@ -49,7 +49,7 @@ class Word extends Component{
                 }
                 
 
-                if(!this.props.word.imgSrc){
+                if(!this.props.word.imgId){
                     this.props.getRemoteImage(this.props.word.selected);  
                     return;
                 }

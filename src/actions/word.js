@@ -1,5 +1,5 @@
 import firebase from '../services/firebase'
-
+import speak from '../services/speaker'
 
 export const LETTER_CHECK = 'LETTER_CHECK'
 export const WORD_CHECK_COMPLETED = 'WORD_CHECK_COMPLETED'
@@ -23,7 +23,16 @@ export const loadWords = () => {
 }
 
 export const checkLetter = (key) => {
-    return (dispatch) => {
+    return (dispatch, getState ) => {
+
+        const { word } = getState();
+
+        if(word.reduced[0] !== key){
+            return;
+        }
+
+        speak(key)
+
         dispatch({
             type:LETTER_CHECK,
             payload:key
@@ -32,7 +41,16 @@ export const checkLetter = (key) => {
 }
 
 export const checkWordCompleted = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+
+        const { word } = getState();
+
+        if(word.selected.toString() !== word.progress.toString()){
+            return;
+        }
+
+        speak(word.selected.join(''))
+
         dispatch({
             type:WORD_CHECK_COMPLETED
         })

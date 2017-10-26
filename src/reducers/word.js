@@ -30,16 +30,14 @@ export default (state = wordState,action) => {
     
     let reduceWord = state.reduced
     let progressWord = state.progress
-    let selectedWord = state.selected
 
     switch(action.type){
         case LETTER_CHECK:
            
-            if(reduceWord[0] === action.payload){
-                reduceWord.shift()
-                progressWord.push(action.payload)
-            }
-
+            reduceWord.shift()
+            
+            progressWord.push(action.payload)
+            
             return {
                 ...state,
                 reduced : reduceWord,
@@ -48,15 +46,11 @@ export default (state = wordState,action) => {
         
         case WORD_CHECK_COMPLETED:
            
-            if(selectedWord.toString() === progressWord.toString()){
-                return {
-                    ...state,
-                    completed : true
-                }
+            return {
+                ...state,
+                completed : true
             }
-
-            return state
-           
+               
         
         case NEW_WORD:
             let randomWordId = checkRandomIdValidity(state.words,state.wordCount);

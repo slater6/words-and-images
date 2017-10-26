@@ -20,7 +20,7 @@ export default (state = imageState,action) => {
             return {
                 ...state,
                 image: {
-                    webformatURL : getBiggerImage(action.payload)
+                    url : getBiggerImage(action.payload)
                 }
             }
 
