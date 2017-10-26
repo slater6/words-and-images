@@ -5,6 +5,10 @@ const imageState = {
     image:[]
 }
 
+const getBiggerImage = (imgUrl) =>{
+    return imgUrl.replace('_640','_960')
+} 
+
 export default (state = imageState,action) => {
     
     switch(action.type){
@@ -16,14 +20,20 @@ export default (state = imageState,action) => {
             return {
                 ...state,
                 image: {
-                    webformatURL : action.payload
+                    webformatURL : getBiggerImage(action.payload)
                 }
             }
 
         case LOAD_RANDOM_IMAGE:
             const imageCount = state.images.length
-            
-            return {...state,image: state.images[Math.floor(Math.random() * imageCount)]}
+            const image = state.images[Math.floor(Math.random() * imageCount)];
+            return {
+                ...state,
+                image: {
+                    id : image.id,
+                    url : getBiggerImage(image.webformatURL)
+                } 
+            }
            
         case NEW_WORD:
             

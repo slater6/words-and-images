@@ -54,9 +54,8 @@ class Word extends Component{
                     return;
                 }
 
-                this.props.getLocalImage(this.props.word.imgSrc);  
+                this.props.getLocalImage(this.props.word.imgId);  
                     
-                
                 break;
         }
        
@@ -96,7 +95,7 @@ class Word extends Component{
             <WordHeader>
                 <WordDisplayer>
                     {this.handleLabel()}
-                    <ImageIndicator isVisible={this.props.word.imgSrc} src="/img/icon-image.png"></ImageIndicator>
+                    <ImageIndicator isVisible={this.props.word.imgId} src="/img/icon-image.png"></ImageIndicator>
                 </WordDisplayer>
                {btnDelete}
             </WordHeader>

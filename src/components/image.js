@@ -7,8 +7,7 @@ import {saveImage} from '../actions'
 
 const btnSave = (props) => {
     if(props.auth.isAuth){
-        return <Button primary onClick={ () => props.saveImage(props.word.id,props.image.image.webformatURL)}>Save Image</Button>
-        
+        return <Button primary onClick={ () => props.saveImage(props.word.id,props.image.image.id)}>Save Image</Button>
     }
     
 }
@@ -16,7 +15,7 @@ const btnSave = (props) => {
 const Image = (props) => (
     <ImageWrapper isVisible={props.image.image}>
         <ImageColumn>
-            <ImageDisplayer src={props.image.image.webformatURL}></ImageDisplayer>
+            <ImageDisplayer src={props.image.image.url}></ImageDisplayer>
             { btnSave(props )}
         </ImageColumn>
     </ImageWrapper>

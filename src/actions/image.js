@@ -1,5 +1,5 @@
-import axios from 'axios'
 import firebase from '../services/firebase'
+import {getImagesByQuery,getImageById} from '../services/pixabay'
 import {getNewWord} from './word'
 
 export const LOAD_RANDOM_IMAGE = 'LOAD_RANDOM_IMAGE'
@@ -8,25 +8,16 @@ export const LOAD_REMOTE_IMAGE = 'LOAD_REMOTE_IMAGE'
 export const SAVE_IMAGE = 'SAVE_IMAGE'
 
 export const getRemoteImage = (word) => {
-    const url = 'https://pixabay.com/api/';
-
-    const params = {
-        params:{
-            key:'6728037-ebcb9080c79881fc16f7f00a2',
-            q:  word.join('').toLowerCase(),
-            safesearch:true,
-            per_page:100
-        }
-    }
 
     return (dispatch) => {
-        axios.get(url,params).then((response)=> {
-            console.log(response);
+        getImagesByQuery(word)
+        .then((response)=> {
             
             dispatch({
                 type:LOAD_REMOTE_IMAGE,
                 payload:response['data']['hits']
             })
+
             dispatch(loadRandomImage())
         })
        
@@ -41,22 +32,27 @@ export const loadRandomImage = () => {
     } 
 }
 
-export const getLocalImage = (imgUrl) => {
+export const getLocalImage = (imgId) => {
     return (dispatch) => {
-        dispatch({
-            type:LOAD_LOCAL_IMAGE,
-            payload : imgUrl
+        getImageById(imgId)
+        .then((response) => {
+            dispatch({
+                type:LOAD_LOCAL_IMAGE,
+                payload : response['data']['hits']['webformatURL']
+            })
         })
+        .catch()
+        
     } 
 }
 
-export const saveImage = (wordId,imageSrc) => {
+export const saveImage = (wordId,imageId) => {
     return (dispatch) => {
         firebase
         .database()
         .ref()
         .child('words/' + wordId)
-        .update({imgSrc:imageSrc})
+        .update({imgId:imageId})
         .then(() => {
             dispatch(getNewWord())
         });

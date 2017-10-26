@@ -2,7 +2,7 @@ import {NEW_WORD,LETTER_CHECK, WORD_CHECK_COMPLETED,FETCH_WORDS} from '../action
 
 const wordState = {
     id:[],
-    imgSrc:null,
+    imgId:null,
     words:[],
     wordCount:0,
     selected:[],
@@ -60,14 +60,13 @@ export default (state = wordState,action) => {
         
         case NEW_WORD:
             let randomWordId = checkRandomIdValidity(state.words,state.wordCount);
-            console.log( randomWordId)
             let randomWord = state.words[randomWordId]['word'].toUpperCase()
-            let randomImage = state.words[randomWordId]['imgSrc'] !== undefined ? state.words[randomWordId]['imgSrc'] : null;
+            let randomImageId = state.words[randomWordId]['imgId'] !== undefined ? state.words[randomWordId]['imgId'] : null;
         
             return {
                 ...state,
                 id: randomWordId,
-                imgSrc:randomImage,
+                imgId:randomImageId,
                 selected : [...randomWord],
                 reduced:[...randomWord],
                 progress:[],
