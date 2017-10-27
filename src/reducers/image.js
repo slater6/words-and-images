@@ -20,7 +20,7 @@ export default (state = imageState,action) => {
             return {
                 ...state,
                 image: {
-                    url : getBiggerImage(action.payload)
+                    url : action.payload
                 }
             }
 
@@ -30,8 +30,8 @@ export default (state = imageState,action) => {
             return {
                 ...state,
                 image: {
-                    id : image.id,
-                    url : getBiggerImage(image.webformatURL)
+                    id : image.id_hash,
+                    url : image.fullHDURL
                 } 
             }
            

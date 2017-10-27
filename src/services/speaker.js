@@ -4,8 +4,8 @@ const msg = new SpeechSynthesisUtterance()
 const voices = window.speechSynthesis.getVoices();
 
 const speak = (word) => {
-   
-    msg.voice = voices[4];
+    
+    msg.voice = voices[1];
     msg.rate = 3;
     msg.pitch = 2;
     msg.text = word;
