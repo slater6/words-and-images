@@ -5,10 +5,6 @@ const imageState = {
     image:[]
 }
 
-const getBiggerImage = (imgUrl) =>{
-    return imgUrl.replace('_640','_960')
-} 
-
 export default (state = imageState,action) => {
     
     switch(action.type){

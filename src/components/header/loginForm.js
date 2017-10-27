@@ -1,26 +1,34 @@
 import React from 'react'
 import {
-    Form, 
-    TextInput, 
+    Navbar,
+    FormGroup,
+    FormControl,
     Button
-} from '../../styles/header'
+} from 'react-bootstrap'
+
 
 const LoginForm = (props) => (
-    <Form onSubmit={props.handleSubmit}>
-        <TextInput 
-            onChange={props.handleInput} 
-            name="username" 
-            value={props.username} 
-            placeholder="Admin username..."
-        />
-        <TextInput 
-            onChange={props.handleInput} 
-            name="password" type="password"   
-            value={props.password} 
-            placeholder="Admin password..."
-        />
-        <Button>Login</Button>
-    </Form>
+    <Navbar.Form pullRight>
+        <FormGroup>
+            <FormControl 
+                type="text" 
+                name="username"  
+                placeholder="Admin username..."
+                onChange={props.handleInput} 
+                value={props.username} 
+            />
+
+            <FormControl 
+                type="password" 
+                name="password"  
+                placeholder="Admin password..."
+                onChange={props.handleInput} 
+                value={props.password} 
+            />
+        </FormGroup>
+    
+        <Button type="submit" onClick={props.handleSubmit}>Login</Button>
+    </Navbar.Form>
 )
 
 export default LoginForm

@@ -1,13 +1,14 @@
 import React from 'react'
 import {
-    Form, 
+    Navbar,
     Button
-} from '../../styles/header'
+} from 'react-bootstrap'
+
 
 const LogoutForm = (props) => (
-    <Form onSubmit={props.handleSubmit}>
-        <Button>Logout</Button>
-    </Form>
+    <Navbar.Form pullRight>
+        <Button type="submit" onClick={props.handleSubmit}>Logout</Button>
+    </Navbar.Form>
 )
 
 export default LogoutForm

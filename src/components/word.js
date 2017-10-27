@@ -14,9 +14,12 @@ import {
     WordHeader,
     WordDisplayer,
     Highlighter,
-    Button,
     ImageIndicator
 } from '../styles/word'
+
+import {
+    Button
+ } from 'react-bootstrap'
 
 
 class Word extends Component{
@@ -49,12 +52,12 @@ class Word extends Component{
                 }
                 
 
-                if(!this.props.word.imgId){
+                // if(!this.props.word.imgId){
                     this.props.getRemoteImage(this.props.word.selected);  
-                    return;
-                }
+                //     return;
+                // }
 
-                this.props.getLocalImage(this.props.word.imgId);  
+                //this.props.getLocalImage(this.props.word.imgId);  
                     
                 break;
         }
@@ -67,6 +70,10 @@ class Word extends Component{
         return this.props.word.selected.map((letter, i) => {
 
             let lastIndex = this.props.word.progress.length - 1;
+
+            if(this.props.word.progress.toString() === this.props.word.selected.toString()){
+                return <Highlighter completed key={i}>{letter}</Highlighter>
+            }
             
             if(i === lastIndex){
                 return <Highlighter active key={i}>{letter}</Highlighter>
@@ -89,7 +96,7 @@ class Word extends Component{
         let btnDelete = ''
 
         if(this.props.auth.isAuth){
-            btnDelete =  <Button danger onClick={this.handleDelete}>x</Button>
+            btnDelete =  <Button bsStyle="danger" onClick={this.handleDelete}>x</Button>
         }
         return (
             <WordHeader>

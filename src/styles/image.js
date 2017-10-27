@@ -5,6 +5,13 @@ export const ImageWrapper = styled.section.attrs({
 })`
     display: ${props => props.display};
     justify-content: center;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    max-width:100%;
+    z-index:10;
 `
 
 export const ImageColumn = styled.section`

@@ -3,6 +3,8 @@ import styled, {css,keyframes} from 'styled-components'
 export const WordHeader = styled.header`
     display: flex;
     justify-content: center;
+    position:relative;
+    z-index:12;
 `
 
 export const WordDisplayer = styled.h1`
@@ -39,6 +41,12 @@ export const Highlighter = styled.span`
     ${props => props.active && css`
         color:red;
         animation: ${activeLetter} 200ms ease;
+    `}
+
+    ${props => props.completed && css`
+        color:#555;
+        opacity:.9;
+        text-shadow:1px 1px 1px #EEE;
     `}
 `
 

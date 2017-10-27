@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {Menu} from '../../styles/header'
+import {
+    Navbar,
+    Nav
+} from 'react-bootstrap'
 
 import {
     checkAuthStatus,
@@ -26,6 +29,7 @@ class Header extends Component{
 
     handleLoginSubmit = (e) => {
         e.preventDefault()
+        console.log('Login')
         this.props.loginAdmin(this.props.auth.username,this.props.auth.password)
     }
 
@@ -49,9 +53,18 @@ class Header extends Component{
             }
         
         return (
-            <Menu>
-                {handleAuthState}
-            </Menu>
+            <Navbar style={{zIndex:'11'}}>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <a href="#">James Games</a>
+                    </Navbar.Brand>
+                </Navbar.Header>
+                <Nav pullRight>
+                    <Navbar.Collapse>
+                        {handleAuthState}
+                    </Navbar.Collapse>
+                </Nav>
+            </Navbar>
         )
     }
 }
