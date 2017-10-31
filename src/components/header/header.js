@@ -29,7 +29,7 @@ class Header extends Component{
             <Navbar style={{zIndex:'11'}}>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">James Games</a>
+                        <a href="/">James Games</a>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav pullRight>

@@ -5,7 +5,6 @@ import {
     loadWords,
     checkLetter,
     checkWordCompleted,
-    deleteWord,
     getRemoteImage,
     loadRandomImage,
     getLocalImage
@@ -16,11 +15,6 @@ import {
     Highlighter,
     ImageIndicator
 } from '../styles/word'
-
-import {
-    Button
- } from 'react-bootstrap'
-
 
 class Word extends Component{
     
@@ -56,12 +50,12 @@ class Word extends Component{
                 }
                 
 
-                // if(!this.props.word.imgId){
+                if(!this.props.word.imgId){
                     this.props.getRemoteImage(this.props.word.selected);  
-                //     return;
-                // }
+                     return;
+                }
 
-                //this.props.getLocalImage(this.props.word.imgId);  
+                this.props.getLocalImage(this.props.word.imgId);  
                     
                 break;
         }
@@ -92,23 +86,16 @@ class Word extends Component{
 
     }
 
-    handleDelete = () => {
-        this.props.deleteWord(this.props.word.id)
-    }
+  
     
     render() {
-        let btnDelete = ''
-
-        if(this.props.auth.isAuth){
-            btnDelete =  <Button bsStyle="danger" onClick={this.handleDelete}>x</Button>
-        }
+        
         return (
             <WordHeader>
                 <WordDisplayer>
                     {this.handleLabel()}
                     <ImageIndicator isVisible={this.props.word.imgId} src="/img/icon-image.png"></ImageIndicator>
                 </WordDisplayer>
-               {btnDelete}
             </WordHeader>
         )
     }
@@ -125,8 +112,7 @@ export default connect(
         checkLetter,
         checkWordCompleted,
         getRemoteImage,
-        getLocalImage,
-        deleteWord,
+        getLocalImage,    
         loadRandomImage
     }
   )(Word)
