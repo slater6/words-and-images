@@ -5,6 +5,8 @@ export const ADMIN_LOGIN = 'ADMIN_LOGIN'
 export const ADMIN_LOGOUT = 'ADMIN_LOGOUT'
 export const UPDATE_USERNAME = 'UPDATE_USERNAME'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
+export const FOCUS_INPUT = 'FOCUS_INPUT'
+export const BLUR_INPUT = 'BLUR_INPUT'
 
 
 export const loginAdmin = (username,password) => {
@@ -66,5 +68,22 @@ export const updateLoginCredentials = (inputName,value) => {
                 })
                 break;
         }
+    }
+}
+
+export const focusInputs = (inputName) => {
+    return (dispatch) => {
+        dispatch({
+            type: FOCUS_INPUT
+        })
+               
+    }
+}
+
+export const blurInputs = (inputName) => {
+    return (dispatch) => {
+        dispatch({
+            type: BLUR_INPUT
+        })
     }
 }

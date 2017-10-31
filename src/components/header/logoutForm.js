@@ -1,14 +1,31 @@
-import React from 'react'
+import React,{Component} from 'react'
+import {connect} from 'react-redux'
 import {
     Navbar,
     Button
 } from 'react-bootstrap'
 
+import {
+    logoutAdmin
+} from '../../actions'
 
-const LogoutForm = (props) => (
-    <Navbar.Form pullRight>
-        <Button type="submit" onClick={props.handleSubmit}>Logout</Button>
-    </Navbar.Form>
-)
 
-export default LogoutForm
+class LogoutForm extends Component{
+    render(){
+        return(
+            <Navbar.Form pullRight>
+            <Button type="submit" onClick={this.props.logoutAdmin}>Logout</Button>
+        </Navbar.Form>
+        )
+    }
+} 
+   
+
+export default connect(
+    (state) => ({
+        auth:state.auth
+    }),
+    {
+       logoutAdmin,
+    }
+  )(LogoutForm)

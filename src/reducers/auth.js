@@ -2,13 +2,16 @@ import {
     UPDATE_USERNAME,
     UPDATE_PASSWORD,
     ADMIN_LOGIN,
-    ADMIN_LOGOUT
+    ADMIN_LOGOUT,
+    FOCUS_INPUT,
+    BLUR_INPUT
 } from '../actions'
 
 const authState = {
     isAuth: false,
     username:'',
-    password:''
+    password:'',
+    inputsFocused:false,
 }
 
 export default (state = authState,action) => {
@@ -27,6 +30,19 @@ export default (state = authState,action) => {
                 password : action.payload
             }
 
+        case FOCUS_INPUT:
+            return {
+                ...state,
+                inputsFocused : true
+
+            }
+            
+        case BLUR_INPUT:
+            return {
+                ...state,
+                inputsFocused : false
+            }
+
         case ADMIN_LOGIN:
             return {
                 ...state,
@@ -42,6 +58,7 @@ export default (state = authState,action) => {
                 username:'',
                 password:''
             }
+
             
         
 

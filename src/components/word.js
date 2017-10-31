@@ -30,6 +30,10 @@ class Word extends Component{
     }
     
     handleKeyPress = (event) => {
+
+        if(this.props.auth.inputsFocused){
+            return;
+        }
         
         switch(event.keyCode){
             case 13:

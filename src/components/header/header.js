@@ -6,10 +6,7 @@ import {
 } from 'react-bootstrap'
 
 import {
-    checkAuthStatus,
-    updateLoginCredentials,
-    loginAdmin,
-    logoutAdmin
+    checkAuthStatus
 } from '../../actions'
 import LoginForm from './loginForm'
 import LogoutForm from './logoutForm'
@@ -21,35 +18,11 @@ class Header extends Component{
         this.props.checkAuthStatus()
     }
 
-    handleInput = (e) => {
-        const inputName = e.target.name
-        const value = e.target.value
-        this.props.updateLoginCredentials(inputName,value)
-    }
-
-    handleLoginSubmit = (e) => {
-        e.preventDefault()
-        console.log('Login')
-        this.props.loginAdmin(this.props.auth.username,this.props.auth.password)
-    }
-
-    handleLogoutSubmit = (e) => {
-        e.preventDefault()
-        this.props.logoutAdmin()
-    }
-
-    
-
     render() {
-            let  handleAuthState = <LoginForm 
-                handleSubmit={this.handleLoginSubmit}
-                handleInput={this.handleInput}
-                username={this.props.auth.username}
-                password={this.props.auth.password}
-            />
+            let  handleAuthState = <LoginForm/>
 
             if(this.props.auth.isAuth){
-                handleAuthState = <LogoutForm  handleSubmit={this.handleLogoutSubmit}/>
+                handleAuthState = <LogoutForm/>
             }
         
         return (
@@ -74,9 +47,6 @@ export default connect(
       auth:state.auth
     }),
     {
-       updateLoginCredentials,
-       loginAdmin,
-       logoutAdmin,
        checkAuthStatus
     }
   )(Header)
