@@ -1,10 +1,12 @@
 import firebase from '../services/firebase'
 import speak from '../services/speaker'
+import {getSourceOfError, getSourceOfSuccess} from '../services/sounder'
 
 export const LETTER_CHECK = 'LETTER_CHECK'
 export const WORD_CHECK_COMPLETED = 'WORD_CHECK_COMPLETED'
 export const NEW_WORD = 'NEW_WORD'
 export const FETCH_WORDS = 'FETCH_WORDS'
+export const PLAY_FAIL_SOUND = 'PLAY_FAIL_SOUND'
 
 export const loadWords = () => {
     return (dispatch) => {
@@ -23,11 +25,18 @@ export const loadWords = () => {
 }
 
 export const checkLetter = (key) => {
+
     return (dispatch, getState ) => {
 
-        const { word } = getState();
+        const { word } = getState()
+        const soundMeta = getSourceOfError()
 
         if(word.reduced[0] !== key){
+            
+            dispatch({
+                type:PLAY_FAIL_SOUND,
+                meta:{ sound : soundMeta }
+            })
             return;
         }
 
@@ -44,6 +53,7 @@ export const checkWordCompleted = () => {
     return (dispatch, getState) => {
 
         const { word } = getState();
+        const soundMeta = getSourceOfSuccess()
 
         if(word.selected.toString() !== word.progress.toString()){
             return;
@@ -52,7 +62,8 @@ export const checkWordCompleted = () => {
         speak(word.selected.join(''))
 
         dispatch({
-            type:WORD_CHECK_COMPLETED
+            type:WORD_CHECK_COMPLETED,
+            meta:{ sound : soundMeta }
         })
     } 
 }
