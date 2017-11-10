@@ -10,6 +10,7 @@ import {
 } from '../../actions'
 import LoginForm from './loginForm'
 import LogoutForm from './logoutForm'
+import SearchForm from './searchForm'
 
 
 class Header extends Component{
@@ -32,11 +33,10 @@ class Header extends Component{
                         <a href="/">James Games</a>
                     </Navbar.Brand>
                 </Navbar.Header>
-                <Nav pullRight>
-                    <Navbar.Collapse>
-                        {handleAuthState}
-                    </Navbar.Collapse>
-                </Nav>
+                <Navbar.Collapse>
+                    <SearchForm/>
+                    {handleAuthState}
+                </Navbar.Collapse>
             </Navbar>
         )
     }

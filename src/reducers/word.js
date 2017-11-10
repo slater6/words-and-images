@@ -3,12 +3,15 @@ import {
     LETTER_CHECK, 
     WORD_CHECK_COMPLETED,
     FETCH_WORDS,
-    SAVE_IMAGE
+    SAVE_IMAGE,
+    SEARCH_WORD,
+    UPDATE_SEARCH_WORD
 } from '../actions'
 
 const wordState = {
     id:[],
     imgId:null,
+    searchWord:'',
     words:[],
     wordCount:0,
     selected:[],
@@ -74,11 +77,49 @@ export default (state = wordState,action) => {
             }
 
         case FETCH_WORDS:
+            
             return {
                 ...state,
                 words : action.payload,
                 wordCount: action.payload.length
             }
+        
+        case SEARCH_WORD:
+            
+            const searchWordId = state.words.findIndex(word => {
+                
+                if(!word){
+                    return
+                }
+
+                return word.word.toUpperCase() === state.searchWord.toUpperCase()
+            })
+
+            if(searchWordId === -1){
+                return state
+            }
+           
+            const searchWord = state.words[searchWordId]['word'].toUpperCase()
+            
+            const searchImageId = state.words[searchWordId]['imgId'] !== undefined ? state.words[searchWordId]['imgId'] : null
+           
+            return {
+                ...state,
+                id: searchWordId,
+                imgId:searchImageId,
+                selected : [...searchWord],
+                reduced:[...searchWord],
+                progress:[],
+                completed:false
+            }
+
+        case UPDATE_SEARCH_WORD:
+            return {
+                ...state,
+                searchWord : action.payload
+            }
+
+        
 
         case SAVE_IMAGE:
             const updateWords = state.words.map((word,index) => {

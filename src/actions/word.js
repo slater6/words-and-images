@@ -6,6 +6,8 @@ export const LETTER_CHECK = 'LETTER_CHECK'
 export const WORD_CHECK_COMPLETED = 'WORD_CHECK_COMPLETED'
 export const NEW_WORD = 'NEW_WORD'
 export const FETCH_WORDS = 'FETCH_WORDS'
+export const SEARCH_WORD = 'SEARCH_WORD'
+export const UPDATE_SEARCH_WORD = 'UPDATE_SEARCH_WORD'
 export const PLAY_FAIL_SOUND = 'PLAY_FAIL_SOUND'
 
 export const loadWords = () => {
@@ -91,4 +93,21 @@ export const deleteWord = (id) =>{
             dispatch(loadWords())
         })
     }
+}
+
+export const searchWord = (searchWord) => {
+    return (dispatch) => {
+        dispatch({
+            type: SEARCH_WORD
+        })
+    } 
+}
+
+export const updateSearchWord = (searchWord) => {
+    return (dispatch) => {
+        dispatch({
+            type: UPDATE_SEARCH_WORD,
+            payload: searchWord
+        })
+    } 
 }
