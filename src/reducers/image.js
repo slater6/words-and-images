@@ -1,4 +1,10 @@
-import {NEW_WORD,LOAD_REMOTE_IMAGE,LOAD_LOCAL_IMAGE,LOAD_RANDOM_IMAGE} from '../actions'
+import {
+    NEW_WORD,
+    LOAD_REMOTE_IMAGE,
+    LOAD_LOCAL_IMAGE,
+    LOAD_RANDOM_IMAGE,
+    SEARCH_WORD
+} from '../actions'
 
 const imageState = {
     images: [],
@@ -31,7 +37,7 @@ export default (state = imageState,action) => {
                 } 
             }
            
-        case NEW_WORD:
+        case NEW_WORD: case SEARCH_WORD:
             
             return {
                 ...state,

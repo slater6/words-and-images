@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {
-    Navbar,
-    Nav
+    Navbar
 } from 'react-bootstrap'
 
 import {

@@ -89,7 +89,7 @@ export default (state = wordState,action) => {
             const searchWordId = state.words.findIndex(word => {
                 
                 if(!word){
-                    return
+                    return false
                 }
 
                 return word.word.toUpperCase() === state.searchWord.toUpperCase()
