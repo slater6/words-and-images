@@ -7,7 +7,7 @@ export const LOAD_LOCAL_IMAGE = 'LOAD_LOCAL_IMAGE'
 export const LOAD_REMOTE_IMAGE = 'LOAD_REMOTE_IMAGE'
 export const SAVE_IMAGE = 'SAVE_IMAGE'
 
-export const getRemoteImage = (word) => {
+export const getRemoteImages = (word) => {
 
     return (dispatch) => {
         getImagesByQuery(word)
@@ -38,7 +38,7 @@ export const getLocalImage = (imgId) => {
         .then((response) => {
             dispatch({
                 type:LOAD_LOCAL_IMAGE,
-                payload : response['data']['hits'][0]['webformatURL']
+                payload : response['data']['hits'][0]['fullHDURL']
             })
         })
         .catch()
@@ -46,14 +46,23 @@ export const getLocalImage = (imgId) => {
     } 
 }
 
-export const saveImage = (wordId,imageId) => {
+export const saveImage = (wordId,imgId) => {
     return (dispatch) => {
         firebase
         .database()
         .ref()
         .child('words/' + wordId)
-        .update({imgId:imageId})
+        .update({imgId:imgId})
         .then(() => {
+        
+            dispatch({
+                type: SAVE_IMAGE,
+                payload : {
+                    wordId,
+                    imgId
+                }
+            })
+
             dispatch(getNewWord())
         });
         

@@ -5,7 +5,7 @@ import {
     loadWords,
     checkLetter,
     checkWordCompleted,
-    getRemoteImage,
+    getRemoteImages,
     loadRandomImage,
     getLocalImage
 } from '../actions'
@@ -51,7 +51,7 @@ class Word extends Component{
                 
 
                 if(!this.props.word.imgId){
-                    this.props.getRemoteImage(this.props.word.selected);  
+                    this.props.getRemoteImages(this.props.word.selected);  
                      return;
                 }
 
@@ -111,7 +111,7 @@ export default connect(
         loadWords,
         checkLetter,
         checkWordCompleted,
-        getRemoteImage,
+        getRemoteImages,
         getLocalImage,    
         loadRandomImage
     }

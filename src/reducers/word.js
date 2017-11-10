@@ -1,4 +1,10 @@
-import {NEW_WORD,LETTER_CHECK, WORD_CHECK_COMPLETED,FETCH_WORDS} from '../actions'
+import {
+    NEW_WORD,
+    LETTER_CHECK, 
+    WORD_CHECK_COMPLETED,
+    FETCH_WORDS,
+    SAVE_IMAGE
+} from '../actions'
 
 const wordState = {
     id:[],
@@ -73,7 +79,24 @@ export default (state = wordState,action) => {
                 words : action.payload,
                 wordCount: action.payload.length
             }
-        
+
+        case SAVE_IMAGE:
+            const updateWords = state.words.map((word,index) => {
+                
+                if(index === action.payload.wordId){
+                    return { ...word, imgId : action.payload.imgId }
+                }
+                
+                return word
+            })
+            
+            return {
+                ...state,
+                words : updateWords,
+               
+            }
+
+            
         default:
                 return state;
     }
