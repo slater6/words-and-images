@@ -17,6 +17,21 @@ const imageState = {
     }
 }
 
+const getUniqueImage = (state) => {
+    const imageCount = state.images.length
+    const randomImage = state.images[Math.floor(Math.random() * imageCount)];
+
+    const isImageAlreadyInHistory = state.history.images.find( image => {
+        return image.id === randomImage.id_hash
+    })
+
+    if(!isImageAlreadyInHistory){
+        return randomImage
+    }
+
+    return getUniqueImage(state)
+}
+
 export default (state = imageState,action) => {
     
     switch(action.type){
@@ -33,19 +48,18 @@ export default (state = imageState,action) => {
             }
 
         case LOAD_RANDOM_IMAGE:
-            const imageCount = state.images.length
-            const image = state.images[Math.floor(Math.random() * imageCount)];
+            const randomImage = getUniqueImage(state)
             return {
                 ...state,
                 image: {
-                    id : image.id_hash,
-                    url : image.fullHDURL
+                    id : randomImage.id_hash,
+                    url : randomImage.fullHDURL
                 },
                 history : {
                     currentIndex : state.history.currentIndex + 1,
                     images: state.history.images.concat({
-                        id : image.id_hash,
-                        url : image.fullHDURL
+                        id : randomImage.id_hash,
+                        url : randomImage.fullHDURL
                     })
                 } 
             }
