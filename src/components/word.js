@@ -6,7 +6,8 @@ import {
     checkLetter,
     checkWordCompleted,
     getRemoteImages,
-    loadRandomImage,
+    loadPreviousImage,
+    loadNextImage,
     getLocalImage
 } from '../actions'
 import {
@@ -34,9 +35,15 @@ class Word extends Component{
                 this.props.getNewWord() 
                 break;
 
-            case 32:
+            case 39:
                 if(this.props.word.completed){
-                    this.props.loadRandomImage()
+                    this.props.loadNextImage()
+                }
+                break;
+
+            case 37:
+                if(this.props.word.completed){
+                    this.props.loadPreviousImage()
                 }
                 break;
             
@@ -113,6 +120,7 @@ export default connect(
         checkWordCompleted,
         getRemoteImages,
         getLocalImage,    
-        loadRandomImage
+        loadPreviousImage,
+        loadNextImage
     }
   )(Word)
