@@ -70,7 +70,10 @@ export const getLocalImage = (imgId) => {
         .then((response) => {
             dispatch({
                 type:LOAD_LOCAL_IMAGE,
-                payload : response['data']['hits'][0]['fullHDURL']
+                payload : {
+                    id : response['data']['hits'][0]['id_hash'],
+                    url : response['data']['hits'][0]['fullHDURL']
+                }
             })
         })
         .catch()

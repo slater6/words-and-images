@@ -43,8 +43,16 @@ export default (state = imageState,action) => {
             return {
                 ...state,
                 image: {
-                    url : action.payload
-                }
+                    id : action.payload.id,
+                    url : action.payload.url
+                },
+                history : {
+                    currentIndex : state.history.currentIndex + 1,
+                    images: state.history.images.concat({
+                        id : action.payload.id,
+                        url : action.payload.url
+                    })
+                } 
             }
 
         case LOAD_RANDOM_IMAGE:
@@ -102,7 +110,11 @@ export default (state = imageState,action) => {
             return {
                 ...state,
                 images : [],
-                image : []
+                image : [],
+                history:{
+                    currentIndex :0,
+                    images: []
+                }
             }
 
 
